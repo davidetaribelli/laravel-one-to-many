@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$project->title}}</h5>
                         <p class="card-text">{{$project->description}}</p>
+                        <small></small>
                         <a href="{{route("admin.projects.show", $project->id)}}" class="btn bg_darkorange">Maggiori informazioni</a>
                     </div>
                 </div>

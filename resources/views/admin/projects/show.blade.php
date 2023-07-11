@@ -11,6 +11,7 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
+                      <h5 class="card-title">{{$project->type->travel}}</h5>
                       <h5 class="card-title">{{$project->title}}</h5>
                       <p class="card-text">{{$project->description}}</p>
                       <a class="card-text" href="{{$project->link}}"> <small class="text-muted">{{$project->link}}</small></a>

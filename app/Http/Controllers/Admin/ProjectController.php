@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Type;
 use App\Models\Project;
 
 class ProjectController extends Controller
@@ -29,7 +29,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.projects.create");
+        $types = Type::all();
+        return view("admin.projects.create", compact("types"));
     }
 
     
@@ -44,10 +45,7 @@ class ProjectController extends Controller
         $data = $request->validated();
 
         $newProject =  new Project;
-        $newProject->title = $data["title"];
-        $newProject->description = $data["description"];
-        $newProject->thumb = $data["thumb"];
-        $newProject->link = $data["link"];
+        $newProject->fill($data);
     
         $newProject->save();
 
@@ -73,13 +71,14 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("admin.projects.edit", compact ("project"));
+        $types = Type::all();
+        return view("admin.projects.edit", compact ("project", "types"));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProjectRequest  $request
+     * @param  \App\Http\Requests\UpdateProjectRequest  $request    
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
@@ -87,10 +86,7 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        $project->title = $data["title"];
-        $project->description = $data["description"];
-        $project->thumb = $data["thumb"];
-        $project->link = $data["link"];
+        $project->fill($data);
     
         $project->update();
 
